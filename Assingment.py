@@ -35,7 +35,7 @@ def fill_signup_form(driver):
 
         # Fill in the form fields with example data
         driver.find_element(By.ID, "firstname").send_keys("Incu")
-        time.sleep(2)
+        time.sleep(2)                #to caputre screenshot
         driver.find_element(By.ID, "lastname").send_keys("Byte")
         time.sleep(2)
         driver.find_element(By.ID, "email_address").send_keys("Incubyte45@example.com")
