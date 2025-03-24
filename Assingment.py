@@ -35,94 +35,36 @@ def fill_signup_form(driver):
 
         # Fill in the form fields with example data
         driver.find_element(By.ID, "firstname").send_keys("Incu")
-        time.sleep(2)                #to caputre screenshot
-        driver.find_element(By.ID, "lastname").send_keys("")
         time.sleep(2)
-        driver.find_element(By.ID, "email_address").send_keys("Incubyte123@gmail.com")
+        driver.find_element(By.ID, "lastname").send_keys("Byte")
         time.sleep(2)
-        driver.find_element(By.ID, "password").send_keys("")
+        driver.find_element(By.ID, "email_address").send_keys("Incubyte45@example.com")
         time.sleep(2)
-        driver.find_element(By.ID, "password-confirmation").send_keys("Incubyte@231")
+        driver.find_element(By.ID, "password").send_keys("Incubyte@123")
+        time.sleep(2)
+        driver.find_element(By.ID, "password-confirmation").send_keys("Incubyte@123")
         time.sleep(2)
 
         
         # Click the "Create an Account" button
         driver.find_element(By.XPATH,"//button[@class='action submit primary']").click()
-        try:
-        
-            codes=check_error_messages(driver)
-            if codes:
-                print(codes)
 
         # Wait for the success or error message after form submission
-        except:
-            WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//div[contains(text(),'Thank you for registering with Main Website Store.')]")))
-            print("Sign Up Successful")
-            log_out(driver) #call log_out function to sign in
-           
-            
-        
+        WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//div[contains(text(),'Thank you for registering with Main Website Store.')]")))
+        print("Sign Up Successful")
+
+        log_out(driver) #call log_out function to sign in
 
         
-        
-    
+         
     except Exception:
         WebDriverWait(driver,2).until(EC.visibility_of_element_located((By.XPATH, "//div[contains(text(),'There is already an account with this email address')]")))
-        print("Email already exists, you can try password reset")    
-    
+        print("Email already exists, you can try password reset")
+
     except TimeoutException:
         print("Timeout: The page took too long to load or the element was not found.")
     except NoSuchElementException as e:
         print(f"Error: Element not found - {e}")
-
-
-def check_error_messages(driver):
-        code=[]
-          
-        try:     
-            username_error = driver.find_element(By.ID, "firstname-error")
-            if username_error.is_displayed():
-                code.append('Firstname is required field')
-        except:
-            pass        
-        try:    
-            last_error = driver.find_element(By.ID, "lastname-error")
-            if last_error.is_displayed():
-                code.append('Lastname is required field')
-        except:
-            pass        
-        try:    
-            email_error = driver.find_element(By.ID, "email_address-error")
-            if email_error.is_displayed():
-                code.append('Valid Email is required field')
-        except:
-            pass        
-        try:
-            pass_error = driver.find_element(By.ID, "password-error")
-            if pass_error.is_displayed():
-                code.append('Password is required field')
-        except:
-            pass        
-        try:    
-            passc_error = driver.find_element(By.ID, "password-confirmation-error")
-            if passc_error.is_displayed():
-                code.append('Password Confirmation is required field')
-        except:
-            pass
-        return code  
-  
-        
-               
-
-        
-            
-        
-   
-        
-
-           
-    
-
     
 def log_out(driver):
     try:
@@ -187,7 +129,6 @@ def main():
 
         # Fill the sign-up form
         fill_signup_form(driver)
-
 
     except Exception as e:
         print(f"An unknown error occurred: {e}")
