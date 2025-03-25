@@ -17,7 +17,7 @@ def init_driver():
         options.add_argument("--start-maximized")  # Open the browser in maximized mode
         options.add_argument("--disable-notification")  # Disable any notoficaton popups
         options.add_experimental_option('excludeSwitches', ['enable-logging']) #ignoring Dev listening warnings
-        Service_obj=Service("C:/Users/Prachi/Downloads/edgedriver_win64/msedgedriver.exe")
+        Service_obj=Service("C:/Users/Downloads/edgedriver_win64/msedgedriver.exe")
         driver = webdriver.Edge(service=Service_obj, options=options)
         return driver
     except WebDriverException as e:
