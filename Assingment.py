@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 from selenium.webdriver.edge.service import Service
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.edge.options import Options
@@ -71,6 +72,8 @@ def log_out(driver):
         
         driver.find_element(By.XPATH, "//button[@class='action switch']").click()
         time.sleep(2)
+        action=ActionChains(driver)
+        action.move_to_element(driver.find_element(By.LINK_TEXT, "Sign Out")).perform()
         driver.find_element(By.LINK_TEXT, "Sign Out").click()
         
         WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//span[contains(text(),'You are signed out')]")))
